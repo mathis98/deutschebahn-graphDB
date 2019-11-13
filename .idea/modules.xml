@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/bahn/bahn.iml" filepath="$PROJECT_DIR$/bahn/bahn.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/burndeutschebahn.iml" filepath="$PROJECT_DIR$/.idea/burndeutschebahn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/burndeutschebahn.iml" filepath="$PROJECT_DIR$/burndeutschebahn.iml" />
     </modules>
   </component>
 </project>

@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="bahn" />
+        <module name="burndeutschebahn" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="bahn" target="8" />
+      <module name="bahn" target="13" />
+      <module name="burndeutschebahn" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
