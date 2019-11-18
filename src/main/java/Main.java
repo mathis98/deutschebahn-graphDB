@@ -1,7 +1,19 @@
-import org.neo4j.driver.v1.Driver;
+import dbpro.Graph;
 
-public class Main {
-    public static void main(String args[]) {
-        System.out.println("1234");
+public class Main
+{
+
+    static String password = "1111";
+    static String uri = "bolt://localhost:7687";
+    static String user = "neo4j";
+
+    static String stationName = "München Hauptbahnhof";
+
+    public static void main( String... args ) throws Exception
+    {
+        try ( Graph graph = new Graph( uri, user, password ) )
+        {
+            graph.addStation(stationName);
+        }
     }
 }
