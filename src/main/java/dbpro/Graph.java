@@ -14,10 +14,6 @@ public class Graph implements AutoCloseable
 {
     private final Driver driver;
 
-    static String password = "1111";
-    static String uri = "bolt://localhost:7687";
-    static String user = "neo4j";
-
     public Graph(String uri, String user, String password)
     {
         driver = GraphDatabase.driver( uri, AuthTokens.basic( user, password ) );

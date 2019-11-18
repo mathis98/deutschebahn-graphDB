@@ -7,7 +7,7 @@ public class Main
     static String uri = "bolt://localhost:7687";
     static String user = "neo4j";
 
-    static String stationName = "München Hauptbahnhof";
+    static String stationName = "Rom Hauptbahnhof";
 
     public static void main( String... args ) throws Exception
     {
