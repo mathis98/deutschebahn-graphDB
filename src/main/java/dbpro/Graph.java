@@ -22,23 +22,25 @@ public class Graph implements AutoCloseable
     }
 
     public void addStation(final String name ) {
-        String queryText = "CREATE (a:Station) " +
-                "SET a.name = $name " +
-                "RETURN a.name + ', from node ' + id(a)";
+        String queryText = "CREATE (rom:Station) " +
+                "SET rom.name = $name " +
+                "RETURN rom.name + ', from node ' + id(rom)";
         Map<String, Object> params = new HashMap<>();
         params.put("name", name);
         runQuery(queryText, params);
     }
 
     public void addConnection(String from, String to) {
-
+        String queryText = "MATCH (a:Station),(b:Station)" +
+                "WHERE a.name = $from AND b.name = $to" +
+                "CREATE (a)-[:ZUG]->(b)";
+        Map<String, Object> params = new HashMap<>();
+        params.put("from", from);
+        params.put("to", to);
+        runQuery(queryText, params);
     }
 
     public void addConnection(int from, int to) {
-
-    }
-
-    private void addConnectionGraph() {
 
     }
 
