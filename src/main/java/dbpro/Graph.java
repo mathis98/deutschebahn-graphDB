@@ -45,8 +45,7 @@ public class Graph implements AutoCloseable
     private void runQuery(String query, Map<String, Object> params) {
         try (Session session = driver.session()) {
             String trans = session.writeTransaction(tx -> {
-                StatementResult result = tx.run(query,
-                        parameters(params));
+                StatementResult result = tx.run(query, params);
                 return result.single().get(0).asString();
             });
             System.out.println(trans);
