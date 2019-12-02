@@ -20,9 +20,12 @@ public class Main
 
         try ( Graph graph = new Graph( uri, user, password ) )
         {
-            graph.addStation("Von");
-            graph.addStation("Nach");
+            graph.addStation("Von", 1);
+            graph.addStation("Nach", 2);
             graph.addConnection("Von", "Nach");
+            graph.addStation("BahnhofA", 3);
+            graph.addStation("BahnhofB", 4);
+            graph.addConnection(3, 4);
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }

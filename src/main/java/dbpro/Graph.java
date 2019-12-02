@@ -21,12 +21,14 @@ public class Graph implements AutoCloseable
         driver.close();
     }
 
-    public void addStation(final String name ) {
+    public void addStation(final String name, final int id) {
         String queryText = "CREATE (rom:Station) " +
                 "SET rom.name = $name " +
-                "RETURN rom.name + ', from node ' + id(rom)";
+                "SET rom.id = $id " +
+                "RETURN rom.name";
         Map<String, Object> params = new HashMap<>();
         params.put("name", name);
+        params.put("id", id);
         runQuery(queryText, params);
     }
 
@@ -42,7 +44,14 @@ public class Graph implements AutoCloseable
     }
 
     public void addConnection(int from, int to) {
-
+        String queryText = "MATCH (a:Station),(b:Station) " +
+                "WHERE a.id = $from AND b.id = $to " +
+                "CREATE (a)-[r:ZUG]->(b) " +
+                "RETURN TYPE(r)";
+        Map<String, Object> params = new HashMap<>();
+        params.put("from", from);
+        params.put("to", to);
+        runQuery(queryText, params);
     }
 
     private void runQuery(String query, Map<String, Object> params) {
