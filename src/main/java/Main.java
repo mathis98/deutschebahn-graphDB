@@ -1,4 +1,6 @@
 import dbpro.Graph;
+import dbpro.dbApiRequest;
+import java.util.ArrayList;
 
 public class Main
 {
@@ -11,9 +13,16 @@ public class Main
 
     public static void main( String... args ) throws Exception
     {
+        dbApiRequest api = new dbApiRequest();
+        String ids = api.getIds();
+
+        System.out.println(ids);
+
         try ( Graph graph = new Graph( uri, user, password ) )
         {
             graph.addStation(stationName);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }
