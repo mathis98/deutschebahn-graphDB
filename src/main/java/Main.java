@@ -20,9 +20,9 @@ public class Main
 
         try ( Graph graph = new Graph( uri, user, password ) )
         {
-            graph.addStation("A");
-            graph.addStation("B");
-            graph.addConnection("A", "B");
+            graph.addStation("Von");
+            graph.addStation("Nach");
+            graph.addConnection("Von", "Nach");
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }

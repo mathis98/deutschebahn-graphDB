@@ -31,9 +31,10 @@ public class Graph implements AutoCloseable
     }
 
     public void addConnection(String from, String to) {
-        String queryText = "MATCH (a:Station),(b:Station)" +
-                "WHERE a.name = $from AND b.name = $to" +
-                "CREATE (a)-[:ZUG]->(b)";
+        String queryText = "MATCH (a:Station),(b:Station) " +
+                "WHERE a.name = $from AND b.name = $to " +
+                "CREATE (a)-[r:ZUG]->(b) " +
+                "RETURN TYPE(r)";
         Map<String, Object> params = new HashMap<>();
         params.put("from", from);
         params.put("to", to);
