@@ -9,7 +9,7 @@
         <module name="burndeutschebahn" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="13">
       <module name="burndeutschebahn" target="13" />
     </bytecodeTargetLevel>
   </component>

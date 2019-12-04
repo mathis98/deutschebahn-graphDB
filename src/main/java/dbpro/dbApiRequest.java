@@ -7,6 +7,8 @@ import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+
+
 public class dbApiRequest {
 
     private final HttpClient httpClient = HttpClient.newBuilder()
@@ -48,7 +50,7 @@ public class dbApiRequest {
     private String sendGetIds() throws IOException, InterruptedException {
 
         // IMPORTANT: use your API token here
-        String token = "5ccef243f4fed95fcccd0d2f26c18a86";
+        String token = "0125bc12c18a59fc14fd31df06caa990";
 
         // new HTTP get request to /stations
         HttpRequest request = HttpRequest.newBuilder()
