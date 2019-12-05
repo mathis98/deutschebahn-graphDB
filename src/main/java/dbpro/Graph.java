@@ -21,14 +21,18 @@ public class Graph implements AutoCloseable
         driver.close();
     }
 
-    public void addStation(final String name, final int id) {
+    public void addStation(final String name, final long id,final String longtitude, final  String latitude ) {
         String queryText = "CREATE (rom:Station) " +
                 "SET rom.name = $name " +
                 "SET rom.id = $id " +
+                "SET rom.long = $longtitude " +
+                "SET rom.lat = $latitude " +
                 "RETURN rom.name";
         Map<String, Object> params = new HashMap<>();
         params.put("name", name);
         params.put("id", id);
+        params.put("longtitude", longtitude);
+        params.put("latitude", latitude);
         runQuery(queryText, params);
     }
 
