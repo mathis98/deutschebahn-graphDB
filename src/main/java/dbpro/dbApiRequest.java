@@ -6,7 +6,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-
+import org.apache.http.client.utils.URIBuilder;
 
 
 public class dbApiRequest {
@@ -50,7 +50,7 @@ public class dbApiRequest {
     private String sendGetIds() throws IOException, InterruptedException {
 
         // IMPORTANT: use your API token here
-        String token = "0125bc12c18a59fc14fd31df06caa990";
+        String token = "da59491d3fed20049926c04cdaa29dae";
 
         // new HTTP get request to /stations
         HttpRequest request = HttpRequest.newBuilder()
@@ -63,9 +63,39 @@ public class dbApiRequest {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         // pretty print response header
-        printResponse(response);
+//        printResponse(response);
 
         // return response body to getIds()
+        return response.body();
+    }
+
+    public String getDeparture(String id, String date) throws IOException, InterruptedException {
+        dbApiRequest request = new dbApiRequest();
+
+        String departure = request.sendGetDeparture(id, date);
+
+        return departure;
+    }
+
+    private String sendGetDeparture(String id, String date) throws IOException, InterruptedException {
+        String token = "da59491d3fed20049926c04cdaa29dae";
+
+        URIBuilder uri = new URIBuilder()
+                .setScheme("https")
+                .setHost("api.deutschebahn.com/fahrplan-plus/v1/arrivalBoard/"+id)
+                .addParameter("date", "2019-12-27");
+
+        System.out.println(uri.toString());
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .GET()
+                .uri(URI.create(uri.toString()))
+                .setHeader("Authorization", "Bearer " + token)
+                .build();
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        printResponse(response);
+
         return response.body();
     }
 

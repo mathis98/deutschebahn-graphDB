@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class Main
 {
-
     static String password = "1111";
     static String uri = "bolt://localhost:7687";
     static String user = "neo4j";
@@ -18,8 +17,9 @@ public class Main
     {
         dbApiRequest api = new dbApiRequest();
         String ids = api.getIds();
+        String departure = api.getDeparture("8011160", "2019-12-27");
 
-        // create a new instance of JSONParser
+//      create a new instance of JSONParser
         JSONParser parser = new JSONParser();
 
         //args: JSON String
@@ -27,16 +27,11 @@ public class Main
         ArrayList<Station> stationList = parser.parse(ids);
 
         stationList.stream().forEach(a -> System.out.println(a.getName()));
-
-
-
-
-
+        System.out.println(departure);
 
        try ( Graph graph = new Graph( uri, user, password ) )
         {
-
-            stationList.stream().forEach(s -> graph.addStation(s.getName(),s.getEvaID(),s.getLongtitude(),s.getLatitude()));
+//            stationList.stream().forEach(s -> graph.addStation(s.getName(),s.getEvaID(),s.getLongtitude(),s.getLatitude()));
            // graph.addStation("Von", 1);
            // graph.addStation("Nach", 2);
            // graph.addConnection("Von", "Nach");
