@@ -4,6 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class JSONParser {
@@ -46,8 +47,8 @@ public class JSONParser {
         return stationList;
     }
 
-    public ArrayList<Stop> parseStops (String jsonString, Station station) throws Exception {
-        ArrayList<Stop> stopList = new ArrayList<>();
+    public HashMap<String, Stop> parseStops (String jsonString, Station station) throws Exception {
+        HashMap<String, Stop> stopList = new HashMap<>();
         org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
         JSONArray stopData = (JSONArray) parser.parse(jsonString);
 
@@ -65,7 +66,7 @@ public class JSONParser {
                 String trainName = (String) dataObj.get("name");
                 String detailsId = (String) dataObj.get("detailsId");
 
-                stopList.add(new Stop(station, track, null, departureTime, trainName, detailsId));
+                stopList.put(detailsId, new Stop(station, track, null, departureTime, trainName, detailsId));
             }
         }
         catch(Exception e) {
