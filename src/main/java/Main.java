@@ -3,7 +3,10 @@ import dbpro.JSONParser;
 import dbpro.Station;
 import dbpro.dbApiRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import dbpro.Stop;
+import dbpro.Journey;
 
 public class Main
 {
@@ -11,33 +14,56 @@ public class Main
     static String uri = "bolt://localhost:7687";
     static String user = "neo4j";
 
-    static String stationName = "Rom Hauptbahnhof";
-
     public static void main( String... args ) throws Exception
     {
-        dbApiRequest api = new dbApiRequest();
-        String ids = api.getIds();
-        String departure = api.getDeparture("8011160", "2019-12-27");
+        // List for storing all the journeys
+        HashMap<String, Journey> journeys = new HashMap<>();
 
-//      create a new instance of JSONParser
+        // new dbAPIRequest
+        dbApiRequest api = new dbApiRequest();
+
+        // create a new instance of JSONParser
         JSONParser parser = new JSONParser();
 
-        //args: JSON String
-        //return List of Station classes
+        /*
+        GET STATION DATA
+         */
+        String ids = dbApiRequest.getIds();
         ArrayList<Station> stationList = parser.parse(ids);
 
-        stationList.stream().forEach(a -> System.out.println(a.getName()));
-        System.out.println(departure);
+        // print result
+        System.out.println("STATIONS: ");
+        stationList.forEach(a -> System.out.println(a.toString()));
+        System.out.println("\n");
 
+        // for each station
+        for(Station station : stationList) {
+            /*
+            GET DEPARTURE INFO
+             */
+            // TODO: this api request only returns 20 stops! loop?
+            String departure = api.getDeparture(station.getEvaID(), "2019-12-27");
+            ArrayList<Stop> stopList = parser.parseStops(departure, new Station("Berlin Hbf", 8011160, null, null));
+
+            // for each stop
+            for(Stop stop : stopList) {
+                // if journey doesn't exist in journeys array
+                if (!journeys.containsKey(stop.getDetailsId())) {
+                    // get journey from /journeyDetails and add as new journey
+                }
+            }
+
+            // add track if necessary
+        }
+
+        /*
+        ADD EVERYTHING TO THE GRAPH/ UPDATE GRAPH
+         */
        try ( Graph graph = new Graph( uri, user, password ) )
-        {
-//            stationList.stream().forEach(s -> graph.addStation(s.getName(),s.getEvaID(),s.getLongtitude(),s.getLatitude()));
-           // graph.addStation("Von", 1);
-           // graph.addStation("Nach", 2);
-           // graph.addConnection("Von", "Nach");
-           // graph.addStation("BahnhofA", 3);
-           // graph.addStation("BahnhofB", 4);
-           // graph.addConnection(3, 4);
+       {
+           // add stations to graph
+//           stationList.forEach(s -> graph.addStation(s.getName(),s.getEvaID(),s.getLongtitude(),s.getLatitude()));
+
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }

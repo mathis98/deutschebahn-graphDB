@@ -17,6 +17,10 @@ public class Station {
 
     }
 
+    public String toString() {
+        return name + " (" + evaID + ") @ lat: " + latitude + ", long: " + longtitude;
+    }
+
     public String getName(){
         return this.name;
     }
@@ -30,8 +34,6 @@ public class Station {
     public String getLatitude(){
         return this.latitude;
     }
-
-
 }
 
 

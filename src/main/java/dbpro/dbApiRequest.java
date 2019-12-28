@@ -63,13 +63,13 @@ public class dbApiRequest {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         // pretty print response header
-//        printResponse(response);
+        printResponse(response);
 
         // return response body to getIds()
         return response.body();
     }
 
-    public String getDeparture(String id, String date) throws IOException, InterruptedException {
+    public String getDeparture(long id, String date) throws IOException, InterruptedException {
         dbApiRequest request = new dbApiRequest();
 
         String departure = request.sendGetDeparture(id, date);
@@ -77,15 +77,13 @@ public class dbApiRequest {
         return departure;
     }
 
-    private String sendGetDeparture(String id, String date) throws IOException, InterruptedException {
+    private String sendGetDeparture(long id, String date) throws IOException, InterruptedException {
         String token = "da59491d3fed20049926c04cdaa29dae";
 
         URIBuilder uri = new URIBuilder()
                 .setScheme("https")
                 .setHost("api.deutschebahn.com/fahrplan-plus/v1/arrivalBoard/"+id)
                 .addParameter("date", "2019-12-27");
-
-        System.out.println(uri.toString());
 
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -105,12 +103,19 @@ public class dbApiRequest {
      */
     private void printResponse(HttpResponse<String> response) {
 
-        // pretty print response headers
-        HttpHeaders headers = response.headers();
-        headers.map().forEach((k, v) -> System.out.println(k + ":" + v));
+        if(response.statusCode() == 200) {
+            System.out.println("Status: " + response.statusCode() + ", OK");
+        }
 
-        // print status code
-        System.out.println(response.statusCode());
+        else {
+
+            // pretty print response headers
+            HttpHeaders headers = response.headers();
+            headers.map().forEach((k, v) -> System.out.println(k + ":" + v));
+
+            // print status code
+            System.out.println(response.statusCode());
+        }
     }
 
 }

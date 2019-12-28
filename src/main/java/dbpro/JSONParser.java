@@ -1,6 +1,5 @@
 package dbpro;
 
-import dbpro.Station;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -11,7 +10,7 @@ public class JSONParser {
 
     public ArrayList<Station> parse (String jsonString) throws Exception{
 
-        ArrayList<Station> stationList = new ArrayList<Station>();
+        ArrayList<Station> stationList = new ArrayList<>();
 
         org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
         JSONObject json = (JSONObject) parser.parse(jsonString);
@@ -19,8 +18,8 @@ public class JSONParser {
 
         try{
             //get Stationnames
-            for(int i=0; i<stationData.size(); i++) {
-                JSONObject dataObj = (JSONObject) stationData.get(i);
+            for (Object stationDatum : stationData) {
+                JSONObject dataObj = (JSONObject) stationDatum;
                 String stationName = (String) dataObj.get("name");
 
 
@@ -33,25 +32,46 @@ public class JSONParser {
                 //get Coords
                 JSONObject dataObj2 = (JSONObject) dataObj1.get("geographicCoordinates");
                 JSONArray coordinates = (JSONArray) dataObj2.get("coordinates");
-                String longtitude = (String) coordinates.get(0).toString();
-                String latitude = (String) coordinates.get(1).toString();
+                String longtitude = coordinates.get(0).toString();
+                String latitude = coordinates.get(1).toString();
 
-                stationList.add(new Station(stationName,stationEvaNumber,longtitude,latitude));
-            }}
+                stationList.add(new Station(stationName, stationEvaNumber, longtitude, latitude));
+            }
+        }
             catch(Exception e){
 
-            System.out.println("A station cant be parsed.");
-
+                System.out.println("A station cant be parsed.");
+                e.printStackTrace();
             }
-
-
-
-
-
-
-
-
-
         return stationList;
+    }
+
+    public ArrayList<Stop> parseStops (String jsonString, Station station) throws Exception {
+        ArrayList<Stop> stopList = new ArrayList<>();
+        org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
+        JSONArray stopData = (JSONArray) parser.parse(jsonString);
+
+        try {
+            for (Object stopDatum : stopData) {
+                JSONObject dataObj = (JSONObject) stopDatum;
+                String trackString = (String) dataObj.get("track");
+                int track;
+                if(trackString != null) {
+                    track = Integer.parseInt(trackString);
+                }
+                else continue;
+
+                String departureTime = (String) dataObj.get("dateTime");
+                String trainName = (String) dataObj.get("name");
+                String detailsId = (String) dataObj.get("detailsId");
+
+                stopList.add(new Stop(station, track, null, departureTime, trainName, detailsId));
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            System.out.println("Stop can't be parsed");
+        }
+        return stopList;
     }
 }
