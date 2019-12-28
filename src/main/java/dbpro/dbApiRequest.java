@@ -82,8 +82,10 @@ public class dbApiRequest {
 
         URIBuilder uri = new URIBuilder()
                 .setScheme("https")
-                .setHost("api.deutschebahn.com/fahrplan-plus/v1/arrivalBoard/"+id)
-                .addParameter("date", "2019-12-27");
+                .setHost("api.deutschebahn.com/fahrplan-plus/v1/departureBoard/"+id)
+                .addParameter("date", date);
+
+        System.out.println(uri);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -93,6 +95,10 @@ public class dbApiRequest {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         printResponse(response);
+
+        if(response.statusCode() == 500) {
+            return "[]";
+        }
 
         return response.body();
     }

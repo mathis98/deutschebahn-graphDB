@@ -32,23 +32,27 @@ public class JSONParser {
 
                 //get Coords
                 JSONObject dataObj2 = (JSONObject) dataObj1.get("geographicCoordinates");
-                JSONArray coordinates = (JSONArray) dataObj2.get("coordinates");
-                String longtitude = coordinates.get(0).toString();
-                String latitude = coordinates.get(1).toString();
-
+                JSONArray coordinates;
+                String longtitude = "0";
+                String latitude = "0";
+                if(dataObj2.containsKey("coordinates")) {
+                    coordinates = (JSONArray) dataObj2.get("coordinates");
+                    longtitude = coordinates.get(0).toString();
+                    latitude = coordinates.get(1).toString();
+                }
                 stationList.add(new Station(stationName, stationEvaNumber, longtitude, latitude));
             }
         }
             catch(Exception e){
-
                 System.out.println("A station cant be parsed.");
+//                System.out.println(jsonString);
                 e.printStackTrace();
             }
         return stationList;
     }
 
-    public HashMap<String, Stop> parseStops (String jsonString, Station station) throws Exception {
-        HashMap<String, Stop> stopList = new HashMap<>();
+    public ArrayList<Stop> parseStops (String jsonString, Station station) throws Exception {
+        ArrayList<Stop> stopList = new ArrayList<>();
         org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
         JSONArray stopData = (JSONArray) parser.parse(jsonString);
 
@@ -58,7 +62,7 @@ public class JSONParser {
                 String trackString = (String) dataObj.get("track");
                 int track;
                 if(trackString != null) {
-                    track = Integer.parseInt(trackString);
+                    track = Integer.parseInt(trackString.substring(0,1));
                 }
                 else continue;
 
@@ -66,7 +70,7 @@ public class JSONParser {
                 String trainName = (String) dataObj.get("name");
                 String detailsId = (String) dataObj.get("detailsId");
 
-                stopList.put(detailsId, new Stop(station, track, null, departureTime, trainName, detailsId));
+                stopList.add(new Stop(station, track, null, departureTime, trainName, detailsId));
             }
         }
         catch(Exception e) {
