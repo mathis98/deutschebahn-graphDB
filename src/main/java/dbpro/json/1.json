@@ -6,9 +6,9 @@
       "long": 53.552736,
       "evalID": 8002549,
       "track": {
-        "trackNumber": "xxx",
-        "roof": "true",
-        "elevator": "false"
+        "trackNumber": 14,
+        "roof": true,
+        "elevator": true
       }
     },
     {
@@ -17,9 +17,9 @@
       "long": 51.451355,
       "evalID": 8000098,
       "track": {
-        "trackNumber": "xxx",
-        "roof": "true",
-        "elevator": "false"
+        "trackNumber": 2,
+        "roof": true,
+        "elevator": true
       }
     },
     {
@@ -28,9 +28,9 @@
       "long": 51.429785,
       "evalID": 8000086,
       "track": {
-        "trackNumber": "xxx",
-        "roof": "true",
-        "elevator": "false"
+        "trackNumber": 4,
+        "roof": true,
+        "elevator": true
       }
     },
     {
@@ -39,9 +39,9 @@
       "long": 51.219962,
       "evalID": 8000085,
       "track": {
-        "trackNumber": "xxx",
-        "roof": "true",
-        "elevator": "false"
+        "trackNumber": 16,
+        "roof": true,
+        "elevator": true
       }
     },
     {
@@ -50,9 +50,9 @@
       "long": 50.94303,
       "evalID": 8000207,
       "track": {
-        "trackNumber": "xxx",
-        "roof": "true",
-        "elevator": "false"
+        "trackNumber": 7,
+        "roof": true,
+        "elevator": true
       }
     }
   ]
