@@ -1,0 +1,114 @@
+{
+  "stations": [
+    {
+      "stationName": "Hamburg Hbf",
+      "lat": 10.006909,
+      "long": 53.552736,
+      "evalID": 8002549,
+      "track": {
+        "trackNumber": 14,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Hamburg-Harburg",
+      "lat": 9.991701,
+      "long": 53.455908,
+      "evalID": 8000147,
+      "track": {
+        "trackNumber": 4,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Hannover Hbf",
+      "lat": 9.741021,
+      "long": 52.376761,
+      "evalID": 8000152,
+      "track": {
+        "trackNumber": 3,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Göttingen",
+      "lat": 9.926072,
+      "long": 51.536815,
+      "evalID": 8000128,
+      "track": {
+        "trackNumber": 10,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Kassel-Wilhelmshöhe",
+      "lat": 9.446898,
+      "long": 51.313114,
+      "evalID": 8003200,
+      "track": {
+        "trackNumber": 2,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Fulda",
+      "lat": 9.683977,
+      "long": 50.554723,
+      "evalID": 8000115,
+      "track": {
+        "trackNumber": 4,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Würzburg Hbf",
+      "lat": 9.93578,
+      "long": 49.801796,
+      "evalID": 8000260,
+      "track": {
+        "trackNumber": 3,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Nürnberg Hbf",
+      "lat": 11.082989,
+      "long": 49.445616,
+      "evalID": 8000284,
+      "track": {
+        "trackNumber": 9,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Ingolstadt Hbf",
+      "lat": 11.437337,
+      "long": 48.744541,
+      "evalID": 8000183,
+      "track": {
+        "trackNumber": 3,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "München Hbf",
+      "lat": 11.558335,
+      "long": 48.140232,
+      "evalID": 8000261,
+      "track": {
+        "trackNumber": 19,
+        "roof": true,
+        "elevator": true
+      }
+    }
+  ]
+}
