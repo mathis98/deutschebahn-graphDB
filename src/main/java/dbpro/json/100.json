@@ -1,0 +1,48 @@
+{
+  "stations": [
+    {
+      "stationName": "Duisburg Hbf",
+      "lat":  6.775903,
+      "long": 51.429785,
+      "evalID": 8000086,
+      "track": {
+        "trackNumber": 13,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Dortmund Hbf",
+      "lat": 7.45929,
+      "long": 51.517896,
+      "evalID": 8000080,
+      "track": {
+        "trackNumber": 10,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Magdeburg Hbf",
+      "lat": 11.626891,
+      "long": 52.130349,
+      "evalID": 8010224,
+      "track": {
+        "trackNumber": 7,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Leipzig Hbf",
+      "lat": 12.3820639,
+      "long": 51.3454712,
+      "evalID": 8010205,
+      "track": {
+        "trackNumber": 1,
+        "roof": true,
+        "elevator": true
+      }
+    }
+  ]
+}
