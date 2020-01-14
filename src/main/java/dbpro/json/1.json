@@ -1,0 +1,59 @@
+{
+  "stations": [
+    {
+      "stationName": "Hamburg Hbf",
+      "lat": 10.006909,
+      "long": 53.552736,
+      "evalID": 8002549,
+      "track": {
+        "trackNumber": "xxx",
+        "roof": "true",
+        "elevator": "false"
+      }
+    },
+    {
+      "stationName": "Essen Hbf",
+      "lat": 7.014793,
+      "long": 51.451355,
+      "evalID": 8000098,
+      "track": {
+        "trackNumber": "xxx",
+        "roof": "true",
+        "elevator": "false"
+      }
+    },
+    {
+      "stationName": "Duisburg Hbf",
+      "lat": 6.775903,
+      "long": 51.429785,
+      "evalID": 8000086,
+      "track": {
+        "trackNumber": "xxx",
+        "roof": "true",
+        "elevator": "false"
+      }
+    },
+    {
+      "stationName": "Düsseldorf Hbf",
+      "lat": 6.794319,
+      "long": 51.219962,
+      "evalID": 8000085,
+      "track": {
+        "trackNumber": "xxx",
+        "roof": "true",
+        "elevator": "false"
+      }
+    },
+    {
+      "stationName": "Köln TODO Hbf",
+      "lat": 6.958729,
+      "long": 50.94303,
+      "evalID": 8000207,
+      "track": {
+        "trackNumber": "xxx",
+        "roof": "true",
+        "elevator": "false"
+      }
+    }
+  ]
+}
