@@ -1,0 +1,70 @@
+{
+    "stations": [
+      {
+        "stationName": "Freiburg (Breisgau) Hbf",
+        "lat":  7.84117,
+        "long": 47.997697,
+        "evalID": 8000107,
+        "track": {
+          "trackNumber": 1,
+          "roof": true,
+          "elevator": true
+        }
+      },
+      {
+        "stationName": "Mannheim Hbf",
+        "lat": 8.468921,
+        "long": 49.479354,
+        "evalID": 8000244,
+        "track": {
+          "trackNumber": 2,
+          "roof": true,
+          "elevator": true
+        }
+      },
+      {
+        "stationName": "Mainz Hbf",
+        "lat":  8.25872,
+        "long": 50.001117,
+        "evalID": 8000240,
+        "track": {
+          "trackNumber": 3,
+          "roof": true,
+          "elevator": true
+        }
+      },
+      {
+        "stationName": "Hamburg-Harburg",
+        "lat": 9.991701,
+        "long": 53.455908,
+        "evalID": 8000147,
+        "track": {
+          "trackNumber": 2,
+          "roof": true,
+          "elevator": true
+        }
+      },
+      {
+        "stationName": "Stralsund Hbf",
+        "lat": 13.077321,
+        "long": 54.308626,
+        "evalID": 8010338,
+        "track": {
+          "trackNumber": 6,
+          "roof": true,
+          "elevator": true
+        }
+      },
+      {
+        "stationName": "Ostseebad Binz",
+        "lat": 13.600507,
+        "long": 54.404819,
+        "evalID": 8011191,
+        "track": {
+          "trackNumber": 1,
+          "roof": true,
+          "elevator": true
+        }
+      }
+    ]
+  }
