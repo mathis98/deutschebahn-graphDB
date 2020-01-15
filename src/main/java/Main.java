@@ -3,19 +3,20 @@ import dbpro.JSONParser;
 import dbpro.Station;
 import dbpro.dbApiRequest;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.*;
 
 import dbpro.Stop;
 import dbpro.Journey;
 
-public class Main
-{
+public class Main {
     static String password = "1111";
     static String uri = "bolt://localhost:7687";
     static String user = "neo4j";
 
-    public static void main( String... args ) throws Exception
-    {
+    public static void main(String... args) throws Exception {
         // List for storing all the journeys
         HashMap<String, Journey> journeys = new HashMap<>();
 
@@ -28,15 +29,29 @@ public class Main
         /*
         GET STATION DATA
          */
-        String ids = dbApiRequest.getIds();
-        System.out.println(ids);
-        ArrayList<Station> stationList = parser.parse(ids);
-        System.out.println("length: " + stationList.size());
+        for (int i = 0; i < 100; i++) {
 
-//         print result
-        System.out.println("STATIONS: ");
-        stationList.forEach(a -> System.out.println(a.toString()));
-        System.out.println("\n");
+            String line = String.valueOf(i);
+
+            try {
+                File file = new File(String.format("D:\\Dev\\Java\\DBPRO\\src\\main\\java\\dbpro\\json\\%s.json", line));
+
+                FileReader reader = new FileReader(file);
+
+                parser.parseJson(reader, line);
+            } catch (Exception e) {
+            }
+        }
+
+//        String ids = dbApiRequest.getIds();
+//        System.out.println(ids);
+//        ArrayList<Station> stationList = parser.parse(ids);
+//        System.out.println("length: " + stationList.size());
+//
+////         print result
+//        System.out.println("STATIONS: ");
+//        stationList.forEach(a -> System.out.println(a.toString()));
+//        System.out.println("\n");
 
         // for each station
 //        for(Station station : stationList) {
