@@ -39,7 +39,7 @@ public class JSONParser {
                 String lon = dataObj.get("long").toString();
                 int trackNr = Integer.valueOf(Long.toString((Long)trackObj.get("trackNumber")));
                 int lineNr = Integer.parseInt(line);
-
+                
                 stationList.add(new Station(stationName, stationEva, lon, lat, lineNr, trackNr, counter));
                 counter++;
             } catch (NumberFormatException e) {

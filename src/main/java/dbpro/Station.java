@@ -38,7 +38,9 @@ public class Station {
 
     public String toString(){
 
-        return this.name + " " + this.evaID;
+        return "Line: " + this.lineInfoList.get(0).getLine() + " Track: " + this.lineInfoList.get(0).getTrack() + " Order: " + this.lineInfoList.get(0).getOrder();
+
+        //this.name + " " + this.evaID;
     }
 }
 
