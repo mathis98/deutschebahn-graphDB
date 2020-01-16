@@ -2,6 +2,8 @@ package dbpro;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.neo4j.unsafe.impl.batchimport.stats.Stat;
+
 import java.io.FileReader;
 import java.util.ArrayList;
 
@@ -10,6 +12,9 @@ import java.util.ArrayList;
 public class JSONParser {
 
     public ArrayList<Station> stationList = new ArrayList<>();
+
+    public int flag = 0;
+
 
 
     public ArrayList<Station> parseJson(FileReader reader, String line) throws Exception {
@@ -21,6 +26,7 @@ public class JSONParser {
 
         //counter is for the position of the station for the line
         int counter = 0;
+        int flag = 0;
 
         //get Array of Stations out of JSONObject
         JSONArray stations = (JSONArray) stationData.get("stations");
@@ -39,9 +45,27 @@ public class JSONParser {
                 String lon = dataObj.get("long").toString();
                 int trackNr = Integer.valueOf(Long.toString((Long)trackObj.get("trackNumber")));
                 int lineNr = Integer.parseInt(line);
-                
-                stationList.add(new Station(stationName, stationEva, lon, lat, lineNr, trackNr, counter));
-                counter++;
+
+                if(stationList.isEmpty()) {
+                    stationList.add(new Station(stationName, stationEva, lon, lat, lineNr, trackNr, counter));
+                    counter++;
+                }else{
+                    for(Station s : stationList){
+
+                        if(s.getEvaID() == stationEva && flag == 0){
+                            s.addToLineList(lineNr);
+                            s.addToTrackList(trackNr);
+                            s.addToLineInfoList(lineNr,trackNr,counter);
+                            counter++;
+                            flag = 1;
+                        }
+                    }
+                    if (flag == 0){
+                        stationList.add(new Station(stationName,stationEva,lon,lat,lineNr,trackNr,counter));
+                        counter++;
+                    }
+
+                }
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }

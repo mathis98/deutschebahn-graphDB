@@ -16,8 +16,7 @@ public class Main {
     static String user = "neo4j";
 
 
-    private static ArrayList<Station> stationList;
-    private static ArrayList<Station> finalStationList;
+    public static ArrayList<Station> stationList;
 
 
     public static void main(String... args) throws Exception {
@@ -44,11 +43,13 @@ public class Main {
 
                 stationList = parser.parseJson(reader, line);
 
-                stationList.stream().forEach(a -> System.out.println(a.toString()));
+
             } catch (Exception e) {
 
             }
         }
+        stationList.stream().forEach(a -> a.writeLineInfo());
+         stationList.stream().forEach(a -> System.out.println("Station: " + a.getEvaID() + " size of infoList: " + a.getLineInfoList().size()));
     }
 }
 

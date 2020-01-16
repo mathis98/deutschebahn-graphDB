@@ -36,11 +36,22 @@ public class Station {
         this.lineInfoList.add(new lineInfo(line, track, order));
     }
 
+    public int getEvaID(){
+        return this.evaID;
+    }
+
     public String toString(){
 
         return "Line: " + this.lineInfoList.get(0).getLine() + " Track: " + this.lineInfoList.get(0).getTrack() + " Order: " + this.lineInfoList.get(0).getOrder();
 
-        //this.name + " " + this.evaID;
+    }
+
+    public void writeLineInfo(){
+        this.lineInfoList.stream().forEach(a -> System.out.println("Station: " + this.name + "  " + a.toString()));
+    }
+
+    public ArrayList<lineInfo> getLineInfoList() {
+        return lineInfoList;
     }
 }
 
