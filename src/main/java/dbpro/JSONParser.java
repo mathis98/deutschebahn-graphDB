@@ -33,7 +33,8 @@ public class JSONParser {
 
         //Iterate station Array
         for(Object station : stations) {
-
+            flag = 0;
+            
             JSONObject dataObj = (JSONObject) station;
             JSONObject trackObj = (JSONObject) dataObj.get("track");
 
@@ -58,6 +59,7 @@ public class JSONParser {
                             s.addToLineInfoList(lineNr,trackNr,counter);
                             counter++;
                             flag = 1;
+                            break;
                         }
                     }
                     if (flag == 0){
