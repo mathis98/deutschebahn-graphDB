@@ -2,11 +2,11 @@ package dbpro;
 
 public class lineInfo {
 
-    private int line;
-    private long track;
-    private int order;
+    public int line;
+    public int track;
+    public int order;
 
-    public lineInfo(int line, long track, int order) {
+    public lineInfo(int line, int track, int order) {
 
         this.line = line;
         this.track = track;
@@ -22,7 +22,7 @@ public class lineInfo {
         return this.line;
     }
 
-    public long getTrack() {
+    public int getTrack() {
         return this.track;
     }
 

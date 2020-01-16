@@ -3,7 +3,6 @@ import dbpro.JSONParser;
 import dbpro.Station;
 import dbpro.dbApiRequest;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.*;
@@ -15,6 +14,11 @@ public class Main {
     static String password = "1111";
     static String uri = "bolt://localhost:7687";
     static String user = "neo4j";
+
+
+    private static ArrayList<Station> stationList;
+    private static ArrayList<Station> finalStationList;
+
 
     public static void main(String... args) throws Exception {
         // List for storing all the journeys
@@ -29,7 +33,7 @@ public class Main {
         /*
         GET STATION DATA
          */
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i <= 100; i++) {
 
             String line = String.valueOf(i);
 
@@ -38,10 +42,23 @@ public class Main {
 
                 FileReader reader = new FileReader(file);
 
-                parser.parseJson(reader, line);
+                stationList = parser.parseJson(reader, line);
+
+                stationList.stream().forEach(a -> System.out.println(a.toString()));
             } catch (Exception e) {
+
             }
         }
+    }
+}
+
+
+
+
+
+
+
+
 
 //        String ids = dbApiRequest.getIds();
 //        System.out.println(ids);
@@ -53,7 +70,7 @@ public class Main {
 //        stationList.forEach(a -> System.out.println(a.toString()));
 //        System.out.println("\n");
 
-        // for each station
+    // for each station
 //        for(Station station : stationList) {
 //            System.out.println("Departures from " + station.getName());
 //            /*
@@ -120,6 +137,5 @@ public class Main {
 //        } catch(Exception e) {
 //            System.out.println(e.getMessage());
 //        }
-    }
-}
+
 

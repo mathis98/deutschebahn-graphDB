@@ -5,67 +5,41 @@ import java.util.ArrayList;
 public class Station {
 
     private String name;
-    private long evaID;
-    private String longtitude;
+    private int evaID;
+    private String longitude;
     private String latitude;
-    private ArrayList<Integer> lineList;
-    private ArrayList<Long> trackList;
-    private ArrayList<lineInfo> lineInfoList;
+    private ArrayList<Integer> lineList = new ArrayList<Integer>();
+    private ArrayList<Integer> trackList = new ArrayList<Integer>();
+    private ArrayList<lineInfo> lineInfoList = new ArrayList<lineInfo>();
 
-    public Station(String name, long evaID, String longtitude, String latitude, int line, long track, int order) {
+    public Station(String name, int evaID, String longitude, String latitude, int line, int track, int order) {
 
         this.name = name;
         this.evaID = evaID;
-        this.longtitude = longtitude;
+        this.longitude = longitude;
         this.latitude = latitude;
-        this.lineList = setLineList(line);
-        this.trackList = setTrackList(track);
-        this.lineInfoList = setLineInfoList(line, track, order);
+        this.lineList.add(line);
+        this.trackList.add(track);
+        this.lineInfoList.add(new lineInfo(line, track, order));
 
     }
 
-    private ArrayList<lineInfo> setLineInfoList(int line, long track, int order) {
-        ArrayList<lineInfo> list = new ArrayList<lineInfo>();
-        list.add(new lineInfo(line, track, order));
-        return list;
+    public void addToLineList(int line) {
+        this.lineList.add(line);
     }
 
-    private ArrayList<Long> setTrackList(long track) {
-        ArrayList<Long> list = new ArrayList<Long>();
-        list.add(track);
-        return list;
+    public void addToTrackList(int track) {
+        this.trackList.add(track);
     }
 
-    private ArrayList<Integer> setLineList(int line) {
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        list.add(line);
-        return list;
+    public void addToLineInfoList(int line, int track, int order) {
+        this.lineInfoList.add(new lineInfo(line, track, order));
     }
 
-    public String toString() {
-        return name + " (" + evaID + "), lat: " + latitude + ", long: " + longtitude;
-    }
+    public String toString(){
 
-    public String getName() {
-        return this.name;
+        return this.name + " " + this.evaID;
     }
-
-    public long getEvaID() {
-        return this.evaID;
-    }
-
-    public String getLongtitude() {
-        return this.longtitude;
-    }
-
-    public String getLatitude() {
-        return this.latitude;
-    }
-
-    public ArrayList<lineInfo> getLineInfoList() {
-        return this.lineInfoList;
-    }
-
 }
 
 

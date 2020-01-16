@@ -2,54 +2,50 @@ package dbpro;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 
 public class JSONParser {
 
+    public ArrayList<Station> stationList = new ArrayList<>();
+
+
     public ArrayList<Station> parseJson(FileReader reader, String line) throws Exception {
 
-        ArrayList<Station> stationList = new ArrayList<>();
-
+        //get JSONObject out of JSON file
         org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
         Object json = parser.parse(reader);
         JSONObject stationData = (JSONObject) json;
 
-        try {
+        //counter is for the position of the station for the line
+        int counter = 0;
 
-            JSONArray stations = (JSONArray) stationData.get("stations");
+        //get Array of Stations out of JSONObject
+        JSONArray stations = (JSONArray) stationData.get("stations");
 
-            System.out.println(stations.toString());
+        //Iterate station Array
+        for(Object station : stations) {
 
-            int order = 0;
+            JSONObject dataObj = (JSONObject) station;
+            JSONObject trackObj = (JSONObject) dataObj.get("track");
 
-            for (Object station : stations) {
-
-                JSONObject dataObj = (JSONObject) station;
-                JSONObject trackObj = (JSONObject) dataObj.get("track");
-
-
+            try {
+                // get variables
                 String stationName = (String) dataObj.get("stationName");
-                long stationEva = (long) dataObj.get("evalID");
+                int stationEva = Integer.valueOf(Long.toString((Long)dataObj.get("evalID")));
                 String lat = dataObj.get("lat").toString();
                 String lon = dataObj.get("long").toString();
-                long trackNr = (long) trackObj.get("trackNumber");
+                int trackNr = Integer.valueOf(Long.toString((Long)trackObj.get("trackNumber")));
                 int lineNr = Integer.parseInt(line);
 
-                stationList.add(new Station(stationName, stationEva, lon, lat, lineNr, trackNr, order));
-
-                order++;
+                stationList.add(new Station(stationName, stationEva, lon, lat, lineNr, trackNr, counter));
+                counter++;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-
-        stationList.stream().forEach(a -> System.out.println(a.getLineInfoList().get(0).toString()));
-
         return stationList;
     }
 
@@ -79,80 +75,7 @@ public class JSONParser {
         }
         return stopList;
     }
+
+
 }
 
-
-//    public ArrayList<Station> parse (String jsonString) throws Exception{
-//
-//        ArrayList<Station> stationList = new ArrayList<>();
-//
-//        org.json.simple.parser.JSONParser parser = new org.json.simple.parser.JSONParser();
-//        JSONObject json = (JSONObject) parser.parse(jsonString);
-//        JSONArray stationData = (JSONArray) json.get("result");
-//
-//        try{
-//            //get Stationnames
-//            for (Object stationDatum : stationData) {
-//                JSONObject dataObj = (JSONObject) stationDatum;
-//                String stationName = (String) dataObj.get("name");
-//
-//
-//                //get Evaids
-//                JSONArray stationEva = (JSONArray) dataObj.get("evaNumbers");
-//                JSONObject dataObj1 = (JSONObject) stationEva.get(0);
-//                long stationEvaNumber = (Long) dataObj1.get("number");
-//
-//
-//                //get Coords
-//                JSONObject dataObj2 = (JSONObject) dataObj1.get("geographicCoordinates");
-//                JSONArray coordinates;
-//                String longtitude = "0";
-//                String latitude = "0";
-//                if(dataObj2.containsKey("coordinates")) {
-//                    coordinates = (JSONArray) dataObj2.get("coordinates");
-//                    longtitude = coordinates.get(0).toString();
-//                    latitude = coordinates.get(1).toString();
-//                }
-//                stationList.add(new Station(stationName, stationEvaNumber, longtitude, latitude));
-//            }
-//        }
-//            catch(Exception e){
-//                System.out.println("A station cant be parsed.");
-////                System.out.println(jsonString);
-//                e.printStackTrace();
-//            }
-//        return stationList;
-//    }
-//        JSONArray employeeList = (JSONArray) obj;
-
-//        try{
-//            //get Stationnames
-//            for (Object stationDatum : stationData) {
-//                JSONObject dataObj = (JSONObject) stationDatum;
-//                String stationName = (String) dataObj.get("name");
-//
-//
-//                //get Evaids
-//                JSONArray stationEva = (JSONArray) dataObj.get("evaNumbers");
-//                JSONObject dataObj1 = (JSONObject) stationEva.get(0);
-//                long stationEvaNumber = (Long) dataObj1.get("number");
-//
-//
-//                //get Coords
-//                JSONObject dataObj2 = (JSONObject) dataObj1.get("geographicCoordinates");
-//                JSONArray coordinates;
-//                String longtitude = "0";
-//                String latitude = "0";
-//                if(dataObj2.containsKey("coordinates")) {
-//                    coordinates = (JSONArray) dataObj2.get("coordinates");
-//                    longtitude = coordinates.get(0).toString();
-//                    latitude = coordinates.get(1).toString();
-//                }
-//                stationList.add(new Station(stationName, stationEvaNumber, longtitude, latitude));
-//            }
-//        }
-//        catch(Exception e){
-//            System.out.println("A station cant be parsed.");
-////                System.out.println(jsonString);
-//            e.printStackTrace();
-//        }
