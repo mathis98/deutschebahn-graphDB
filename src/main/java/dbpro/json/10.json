@@ -1,0 +1,103 @@
+{
+  "stations": [
+    {
+      "stationName": "Berlin Gesundbrunnen",
+      "lat":  52.548963,
+      "long": 13.388513,
+      "evalID": 8011102,
+      "track": {
+        "trackNumber": 7,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Berlin Hbf",
+      "lat": 13.369545,
+      "long": 52.525592,
+      "evalID": 8011160,
+      "track": {
+        "trackNumber": 4,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Berlin-Spandau",
+      "lat":  13.197534,
+      "long": 52.534475,
+      "evalID": 8010404,
+      "track": {
+        "trackNumber": 4,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Hannover Hbf",
+      "lat": 9.741021,
+      "long": 52.376761,
+      "evalID": 8000152,
+      "track": {
+        "trackNumber": 12,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Bielefeld Hbf",
+      "lat": 8.532722,
+      "long": 52.029261,
+      "evalID": 8000036,
+      "track": {
+        "trackNumber": 4,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Hamm(Westf)",
+      "lat": 7.807821,
+      "long": 51.678078,
+      "evalID": 8000149,
+      "track": {
+        "trackNumber": 10,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Hagen Hbf",
+      "lat": 7.460249,
+      "long": 51.362747,
+      "evalID": 8000142,
+      "track": {
+        "trackNumber": 7,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Wuppertal Hbf",
+      "lat": 7.149543,
+      "long": 51.254363,
+      "evalID": 8000036,
+      "track": {
+        "trackNumber": 1,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Köln Hbf",
+      "lat": 6.958729,
+      "long": 50.94303,
+      "evalID": 8000207,
+      "track": {
+        "trackNumber": 7,
+        "roof": true,
+        "elevator": true
+      }
+    }
+  ]
+}
