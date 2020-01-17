@@ -5,8 +5,6 @@ import org.neo4j.driver.v1.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.neo4j.driver.v1.Values.parameters;
-
 public class Graph implements AutoCloseable
 {
     private final Driver driver;
@@ -21,43 +19,86 @@ public class Graph implements AutoCloseable
         driver.close();
     }
 
-    public void addStation(final String name, final long id,final String longtitude, final  String latitude ) {
-        String queryText = "CREATE (rom:Station) " +
-                "SET rom.name = $name " +
-                "SET rom.id = $id " +
-                "SET rom.long = $longtitude " +
-                "SET rom.lat = $latitude " +
-                "RETURN rom.name";
+    /*
+        Funktion um eine Station hinzuzufügen
+        Das Wetter soll aus der OpenWeatherMap API kommen
+     */
+    public void addStation(
+            final String name,
+            final long id,
+            final double longitude,
+            final  double latitude,
+            boolean goodWeather
+    ) {
+        String queryText = "CREATE (s:Station) " +
+                "SET s.name = $name " +
+                "SET s.evaID = $id " +
+                "SET s.long = $longitude " +
+                "SET s.lat = $latitude " +
+                "SET s.goodWeather = $goodWeather " +
+                "RETURN s.name";
         Map<String, Object> params = new HashMap<>();
         params.put("name", name);
         params.put("id", id);
-        params.put("longtitude", longtitude);
+        params.put("longitude", longitude);
         params.put("latitude", latitude);
+        params.put("goodWeather", goodWeather);
         runQuery(queryText, params);
     }
 
-    public void addConnection(String from, String to) {
-        String queryText = "MATCH (a:Station),(b:Station) " +
-                "WHERE a.name = $from AND b.name = $to " +
-                "CREATE (a)-[r:ZUG]->(b) " +
+    /*
+        Funktion um eine Zugverbindung zwischen zwei Gleisen zweier
+        Bahnhöfe hinzuzufügen
+     */
+    public void addConnection(int startTrack, int startID, int endTrack, int endID) {
+        String queryText = "MATCH (a:Track),(b:Track) " +
+                "WHERE a.number = $startTrack AND a.evaID = $startID " +
+                "AND b.number = $endTrack AND b.evaID = $endID " +
+                "CREATE (a)-[r:Zug]->(b) " +
                 "RETURN TYPE(r)";
         Map<String, Object> params = new HashMap<>();
-        params.put("from", from);
-        params.put("to", to);
+        params.put("startTrack", startTrack);
+        params.put("startID", startID);
+        params.put("endTrack", endTrack);
+        params.put("endID", endID);
         runQuery(queryText, params);
     }
 
-    public void addConnection(int from, int to) {
-        String queryText = "MATCH (a:Station),(b:Station) " +
-                "WHERE a.id = $from AND b.id = $to " +
-                "CREATE (a)-[r:ZUG]->(b) " +
-                "RETURN TYPE(r)";
+    /*
+        Funktion um ein Gleis hinzuzufügen
+        die id ist die des Bahnhofes zu welchem das Gleis gehört
+     */
+    public void addTrack(int trackNumber, boolean roofing, boolean elevator, int id) {
+        String queryText = "CREATE (t:Track) " +
+                "SET t.number = $number " +
+                "Set t.roofing = $roofing " +
+                "SET t.elevator = $elevator " +
+                "SET t.evaID = $evaID " +
+                "RETURN toString(t.number)";
         Map<String, Object> params = new HashMap<>();
-        params.put("from", from);
-        params.put("to", to);
+        params.put("number", trackNumber);
+        params.put("roofing", roofing);
+        params.put("elevator", elevator);
+        params.put("evaID", id);
         runQuery(queryText, params);
     }
 
+    /*
+        Funktion um die Gleise mit ihren jeweiligen Bahnhöfen zu verbinden
+        dies geschieht anhand des evaID Werts
+     */
+    public void connectTracksToStations() {
+        String queryText = "MATCH (a:Station),(b:Track) " +
+                "WHERE a.evaID = b.evaID " +
+                "CREATE (a)-[r:has]->(b) " +
+                "RETURN DISTINCT type(r)";
+        Map<String, Object> params = new HashMap<>();
+        runQuery(queryText, params);
+    }
+
+    /*
+        Diese Funktion führt eine neo4j query auf der Datenbank aus
+     */
     private void runQuery(String query, Map<String, Object> params) {
         try (Session session = driver.session()) {
             String trans = session.writeTransaction(tx -> {

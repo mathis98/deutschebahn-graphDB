@@ -47,7 +47,7 @@ public class Station {
     }
 
     public void writeLineInfo(){
-        this.lineInfoList.stream().forEach(a -> System.out.println("Station: " + this.name + "  " + a.toString()));
+        this.lineInfoList.stream().forEach(a -> System.out.println("Station: " + this.name + " (" + this.evaID + ") " + a.toString()));
     }
 
     public ArrayList<lineInfo> getLineInfoList() {
