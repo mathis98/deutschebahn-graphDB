@@ -1,0 +1,85 @@
+{
+  "stations": [
+    {
+      "stationName": "Hannover Hbf",
+      "lat": 52.376761,
+      "long": 9.741021,
+      "evalID": 8000152,
+      "track": {
+        "trackNumber": 4,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Göttingen",
+      "lat": 51.536815,
+      "long": 9.926072,
+      "evalID": 8000128,
+      "track": {
+        "trackNumber": 10,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Kassel-Wilhelmshöhe",
+      "lat": 51.313114,
+      "long": 9.446898,
+      "evalID": 8003200,
+      "track": {
+        "trackNumber": 2,
+        "roof": true,
+        "elevator": true
+      }
+    },{
+      "stationName": "Frankfurt(Main) Hbf",
+      "lat": 50.107145,
+      "long": 8.663789,
+      "evalID": 8000105,
+      "track": {
+        "trackNumber": 6,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Frankfurt(M) Flughafen Fernbf",
+      "lat": 50.053167,
+      "long": 8.570185,
+      "evalID": 8070003,
+      "track": {
+        "trackNumber": 5,
+        "roof": true,
+        "elevator": true
+      }
+    },
+        {
+      "stationName": "Mannheim Hbf",
+      "lat": 49.479354,
+      "long": 8.468921,
+      "evalID": 8000244,
+      "track": {
+        "trackNumber": 5,
+        "roof": true,
+        "elevator": true
+      }
+    },
+        {
+      "stationName": "Stuttgart Hbf",
+      "lat": 48.784084,
+      "long": 9.181635,
+      "evalID": 8000096,
+      "track": {
+        "trackNumber": 5,
+        "roof": true,
+        "elevator": true
+      }
+    }
+  ]
+}
+
+
+
+
+

@@ -1,0 +1,107 @@
+{
+  "stations": [
+  {
+      "stationName": "Hamburg Hbf",
+      "lat": 53.552736,
+      "long": 10.006909,
+      "evalID": 8002549,
+      "track": {
+        "trackNumber": 14,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Hannover Hbf",
+      "lat": 52.376761,
+      "long": 9.741021,
+      "evalID": 8000152,
+      "track": {
+        "trackNumber": 3,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Göttingen",
+      "lat": 51.536815,
+      "long": 9.926072,
+      "evalID": 8000128,
+      "track": {
+        "trackNumber": 10,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Kassel-Wilhelmshöhe",
+      "lat": 51.313114,
+      "long": 9.446898,
+      "evalID": 8003200,
+      "track": {
+        "trackNumber": 2,
+        "roof": true,
+        "elevator": true
+      }
+    },{
+      "stationName": "Frankfurt(Main) Hbf",
+      "lat": 50.107145,
+      "long": 8.663789,
+      "evalID": 8000105,
+      "track": {
+        "trackNumber": 6,
+        "roof": true,
+        "elevator": true
+      }
+    },
+        {
+      "stationName": "Mannheim Hbf",
+      "lat": 49.479354,
+      "long": 8.468921,
+      "evalID": 8000244,
+      "track": {
+        "trackNumber": 8,
+        "roof": true,
+        "elevator": true
+      }
+    },
+        {
+      "stationName": "Karlsruhe Hbf",
+      "lat": 48.993515,
+      "long": 8.402181,
+      "evalID": 8000191,
+      "track": {
+        "trackNumber": 2,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Baden-Baden",
+      "lat": 48.790327,
+      "long": 8.190831,
+      "evalID": 8000774,
+      "track": {
+        "trackNumber": 7,
+        "roof": true,
+        "elevator": true
+      }
+    },
+      {
+      "stationName": "Freiburg(Breisgau) Hbf",
+      "lat": 47.997697,
+      "long": 7.84117,
+      "evalID": 8000107,
+      "track": {
+        "trackNumber": 3,
+        "roof": true,
+        "elevator": true
+      }
+    }
+  ]
+}
+
+
+
+
+

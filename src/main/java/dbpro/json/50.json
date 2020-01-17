@@ -1,0 +1,148 @@
+{
+  "stations": [
+    {
+      "stationName": "Dresden Hbf",
+      "lat": 51.040563,
+      "long": 13.732035,
+      "evalID": 8010085,
+      "track": {
+        "trackNumber": 3,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Dresden-Neustadt",
+      "lat": 51.065899,
+      "long": 13.740701,
+      "evalID": 8010089,
+      "track": {
+        "trackNumber": 6,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Riesa",
+      "lat": 51.309654,
+      "long": 13.287734,
+      "evalID": 8010297,
+      "track": {
+        "trackNumber": 3,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Leipzig Hbf",
+      "lat": 51.345696,
+      "long": 12.380428,
+      "evalID": 8098205,
+      "track": {
+        "trackNumber": 14,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Erfurt Hbf",
+      "lat": 50.972551,
+      "long": 11.038499,
+      "evalID": 8010101,
+      "track": {
+        "trackNumber": 1,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Gotha",
+      "lat": 50.93907,
+      "long": 10.712568,
+      "evalID": 8010136,
+      "track": {
+        "trackNumber": 2,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Eisenach",
+      "lat": 50.976922,
+      "long": 10.331986,
+      "evalID": 8010097,
+      "track": {
+        "trackNumber": 5,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Bad Hersfeld",
+      "lat": 50.869632,
+      "long": 9.716182,
+      "evalID": 8000020,
+      "track": {
+        "trackNumber": 2,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Fulda",
+      "lat": 50.554723,
+      "long": 9.683977,
+      "evalID": 8000115,
+      "track": {
+        "trackNumber": 3,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Frankfurt(Main) Hbf",
+      "lat": 50.107145,
+      "long": 8.663789,
+      "evalID": 8000105,
+      "track": {
+        "trackNumber": 7,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Frankfurt(M) Flughafen Fernbf",
+      "lat": 50.053167,
+      "long": 8.570185,
+      "evalID": 8070003,
+      "track": {
+        "trackNumber": 7,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Mainz Hbf",
+      "lat": 50.001117,
+      "long": 8.25872,
+      "evalID": 8000240,
+      "track": {
+        "trackNumber": 2,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Wiesbaden Hbf",
+      "lat": 50.070791,
+      "long": 8.243731,
+      "evalID": 8000250,
+      "track": {
+        "trackNumber": 5,
+        "roof": true,
+        "elevator": true
+      }
+    }
+
+  ]
+}
