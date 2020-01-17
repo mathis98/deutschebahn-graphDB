@@ -1,0 +1,125 @@
+{
+  "stations": [
+    {
+      "stationName": "Essen Hbf",
+      "lat":  7.014793,
+      "long": 51.451355,
+      "evalID": 8000098,
+      "track": {
+        "trackNumber": 2,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Duisburg Hbf",
+      "lat": 6.775903,
+      "long": 51.429785,
+      "evalID": 8000086,
+      "track": {
+        "trackNumber": 4,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Düsseldorf Hbf",
+      "lat":  6.794319,
+      "long": 51.219962,
+      "evalID": 8000085,
+      "track": {
+        "trackNumber": 16,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Köln Messe/Deutz Gl.11-12",
+      "lat": 6.974067,
+      "long": 50.941721,
+      "evalID": 8073368,
+      "track": {
+        "trackNumber": 11,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Siegburg/Bonn",
+      "lat": 7.203026,
+      "long": 50.793915,
+      "evalID": 8005556,
+      "track": {
+        "trackNumber": 6,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Frankfurt(M) Flughafen Fernbf",
+      "lat": 8.570185,
+      "long": 51.678078,
+      "evalID": 8070003,
+      "track": {
+        "trackNumber": 4,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Frankfurt(Main)Hbf",
+      "lat": 8.663789,
+      "long": 50.107145,
+      "evalID": 8000105,
+      "track": {
+        "trackNumber": 7,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Aschaffenburg Hbf",
+      "lat": 9.143697,
+      "long": 49.980557,
+      "evalID": 8000010,
+      "track": {
+        "trackNumber": 6,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Würzburg Hbf",
+      "lat": 9.93578,
+      "long": 49.801796,
+      "evalID": 8000260,
+      "track": {
+        "trackNumber": 3,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "Nürnberg Hbf",
+      "lat": 11.082989,
+      "long": 49.445616,
+      "evalID": 8000284,
+      "track": {
+        "trackNumber": 9,
+        "roof": true,
+        "elevator": true
+      }
+    },
+    {
+      "stationName": "München Hbf",
+      "lat": 11.558335,
+      "long": 48.140232,
+      "evalID": 8000261,
+      "track": {
+        "trackNumber": 22,
+        "roof": true,
+        "elevator": true
+      }
+    }
+  ]
+}

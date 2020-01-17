@@ -2,8 +2,8 @@
   "stations": [
     {
       "stationName": "Berlin Gesundbrunnen",
-      "lat":  52.548963,
-      "long": 13.388513,
+      "lat":  13.388513,
+      "long": 52.548963,
       "evalID": 8011102,
       "track": {
         "trackNumber": 7,
