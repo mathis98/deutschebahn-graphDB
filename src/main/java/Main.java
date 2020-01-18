@@ -57,7 +57,7 @@ public class Main {
         //add weather data
         stationList.stream().forEach(a -> {
             try {
-                a.setWeather(owm.currentWeatherByCoords(a.getLatitude(), a.getLongitude()).getWeatherList().get(0).getMainInfo());
+                a.setWeather(owm.currentWeatherByCoords(a.getLatitude(), a.getLongitude()).getWeatherList().get(0).getConditionId());
             } catch (APIException e) {
                 e.printStackTrace();
             }

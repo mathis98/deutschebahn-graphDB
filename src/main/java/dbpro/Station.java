@@ -8,17 +8,21 @@ public class Station {
     private int evaID;
     private Double longitude;
     private Double latitude;
-    private String weather;
+    private boolean weather;
     private ArrayList<Integer> lineList = new ArrayList<Integer>();
     private ArrayList<Integer> trackList = new ArrayList<Integer>();
     private ArrayList<lineInfo> lineInfoList = new ArrayList<lineInfo>();
 
-    public String getWeather() {
+    public boolean getWeather() {
         return weather;
     }
 
-    public void setWeather(String weather) {
-        this.weather = weather;
+    public void setWeather(int weather) {
+        if(weather >= 800) {
+            this.weather = true;
+        } else {
+            this.weather = false;
+        }
     }
 
     public Station(String name, int evaID, String longitude, String latitude, int line, int track, int order) {
