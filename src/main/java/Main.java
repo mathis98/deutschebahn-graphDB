@@ -66,19 +66,16 @@ public class Main {
         //Create Stations and tracks
         try (Graph graph = new Graph(uri, user, password)) {
 
-//            for (Station s : stationList) {
-//                graph.addStation(s.getName(), s.getEvaID(), s.getLongitude(), s.getLatitude(), true);
-//
-//                for (Integer t : s.getTrackList()) {
-//                    graph.addTrack(t, true, true, s.getEvaID());
-//                }
-//            }
-//
-//            //Now create connections between stations and their tracks
-//            graph.connectTracksToStations();
+            for (Station s : stationList) {
+                graph.addStation(s.getName(), s.getEvaID(), s.getLongitude(), s.getLatitude(), s.getWeather());
 
+                for (Integer t : s.getTrackList()) {
+                    graph.addTrack(t, true, true, s.getEvaID());
+                }
+            }
 
-            //graph.addConnection(3, 8002549, 10, 8000098);
+            //Now create connections between stations and their tracks
+            graph.connectTracksToStations();
 
             //Now create connections between tracks
             for (int i = 0; i <= 100; i++) {
@@ -87,14 +84,16 @@ public class Main {
                     if (s.getLineList().contains(i)) {
                         for (lineInfo info : s.getLineInfoList()) {
                             if (info.getLine() == i) {
-                                trackOrder.add(new Integer[]{info.getTrack(), i, info.getOrder()});
+                                trackOrder.add(new Integer[]{info.getTrack(), i, info.getOrder(), s.getEvaID()});
                             }
                         }
                     }
                 }
 
-                for(int t = 0; t < trackOrder.size(); t++){
-                    System.out.println("" + t + "  " + trackOrder.size());
+                for (int t = 0; t < trackOrder.size(); t++) {
+                    if (t < (trackOrder.size() - 1)) {
+                        graph.addConnection(trackOrder.get(t)[0], trackOrder.get(t)[3], trackOrder.get(t + 1)[0], trackOrder.get(t + 1)[3]);
+                    }
                 }
                 trackOrder.clear();
             }
