@@ -1,21 +1,21 @@
-import dbpro.Graph;
-import dbpro.JSONParser;
-import dbpro.Station;
-import dbpro.dbApiRequest;
+import dbpro.*;
 
 import java.io.File;
 import java.io.FileReader;
 import java.util.*;
 
-import dbpro.Stop;
-import dbpro.Journey;
+import org.neo4j.unsafe.impl.batchimport.stats.Stat;
 
 public class Main {
-    static String password = "1111";
+    static String password = "1234";
     static String uri = "bolt://localhost:7687";
     static String user = "neo4j";
 
     public static ArrayList<Station> stationList;
+
+    public static ArrayList<Integer[]> trackOrder = new ArrayList<Integer[]>();
+    public static lineInfo start;
+    public static lineInfo end;
 
 
     public static void main(String... args) throws Exception {
@@ -36,7 +36,7 @@ public class Main {
             String line = String.valueOf(i);
 
             try {
-                File file = new File(String.format("/Users/mathisarend/Documents/Dev/burndeutschebahn/src/main/java/dbpro/json/%s.json", line));
+                File file = new File(String.format("src/main/java/dbpro/json/%s.json", line));
 
                 FileReader reader = new FileReader(file);
 
@@ -47,19 +47,47 @@ public class Main {
 
             }
         }
-        stationList.stream().forEach(a -> a.writeLineInfo());
-        stationList.stream().forEach(a -> System.out.println("Station: " + a.getEvaID() + " size of infoList: " + a.getLineInfoList().size()));
+        //stationList.stream().forEach(a -> a.writeLineInfo());
+        //stationList.stream().forEach(a -> System.out.println("Station: " + a.getEvaID() + " size of infoList: " + a.getLineInfoList().size()));
 
-        try(Graph graph = new Graph(uri, user, password)) {
-            graph.addStation("Hamburg Hbf", 8002549, 10.0066,53.5529, true);
-            graph.addTrack(3, true, false, 8002549);
-            graph.addStation("Essen Hbf", 8000098, 7.0129, 51.4504, false);
-            graph.addTrack(10,false, true, 8000098);
-            graph.connectTracksToStations();
+        //Create Stations and tracks
+        try (Graph graph = new Graph(uri, user, password)) {
 
-            graph.addConnection(3, 8002549, 10, 8000098);
+//            for (Station s : stationList) {
+//                graph.addStation(s.getName(), s.getEvaID(), s.getLongitude(), s.getLatitude(), true);
+//
+//                for (Integer t : s.getTrackList()) {
+//                    graph.addTrack(t, true, true, s.getEvaID());
+//                }
+//            }
+//
+//            //Now create connections between stations and their tracks
+//            graph.connectTracksToStations();
 
-        } catch(Exception e) {
+
+            //graph.addConnection(3, 8002549, 10, 8000098);
+
+            //Now create connections between tracks
+            for (int i = 0; i <= 100; i++) {
+                for (Station s : stationList) {
+
+                    if (s.getLineList().contains(i)) {
+                        for (lineInfo info : s.getLineInfoList()) {
+                            if (info.getLine() == i) {
+                                trackOrder.add(new Integer[]{info.getTrack(), i, info.getOrder()});
+                            }
+                        }
+                    }
+                }
+
+                for(int t = 0; t < trackOrder.size(); t++){
+                    System.out.println("" + t + "  " + trackOrder.size());
+                }
+                trackOrder.clear();
+            }
+            //trackOrder.stream().forEach(a -> System.out.println("line: " + a[1] + " track: " + a[0] + " order: " + a[2]));
+
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
