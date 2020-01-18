@@ -48,17 +48,19 @@ public class Graph implements AutoCloseable {
         Funktion um eine Zugverbindung zwischen zwei Gleisen zweier
         Bahnhöfe hinzuzufügen
      */
-    public void addConnection(int startTrack, int startID, int endTrack, int endID) {
+    public void addConnection(int startTrack, int startID, int endTrack, int endID, int trainNumber) {
         String queryText = "MATCH (a:Track),(b:Track) " +
                 "WHERE a.number = $startTrack AND a.evaID = $startID " +
                 "AND b.number = $endTrack AND b.evaID = $endID " +
                 "CREATE (a)-[r:Zug]->(b) " +
+                "SET r.trainNumber = $trainNumber " +
                 "RETURN TYPE(r)";
         Map<String, Object> params = new HashMap<>();
         params.put("startTrack", startTrack);
         params.put("startID", startID);
         params.put("endTrack", endTrack);
         params.put("endID", endID);
+        params.put("trainNumber", trainNumber);
         runQuery(queryText, params);
     }
 

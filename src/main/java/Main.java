@@ -88,7 +88,7 @@ public class Main {
                     if (s.getLineList().contains(i)) {
                         for (lineInfo info : s.getLineInfoList()) {
                             if (info.getLine() == i) {
-                                trackOrder.add(new Integer[]{info.getTrack(), i, info.getOrder(), s.getEvaID()});
+                                trackOrder.add(new Integer[]{info.getTrack(), i, info.getOrder(), s.getEvaID(), info.getLine()});
                             }
                         }
                     }
@@ -96,7 +96,7 @@ public class Main {
 
                 for (int t = 0; t < trackOrder.size(); t++) {
                     if (t < (trackOrder.size() - 1)) {
-                        graph.addConnection(trackOrder.get(t)[0], trackOrder.get(t)[3], trackOrder.get(t + 1)[0], trackOrder.get(t + 1)[3]);
+                        graph.addConnection(trackOrder.get(t)[0], trackOrder.get(t)[3], trackOrder.get(t + 1)[0], trackOrder.get(t + 1)[3], trackOrder.get(t)[4]);
                     }
                 }
                 trackOrder.clear();
