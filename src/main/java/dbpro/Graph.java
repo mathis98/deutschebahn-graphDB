@@ -5,13 +5,11 @@ import org.neo4j.driver.v1.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Graph implements AutoCloseable
-{
+public class Graph implements AutoCloseable {
     private final Driver driver;
 
-    public Graph(String uri, String user, String password)
-    {
-        driver = GraphDatabase.driver( uri, AuthTokens.basic( user, password ) );
+    public Graph(String uri, String user, String password) {
+        driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
     }
 
     @Override
@@ -27,7 +25,7 @@ public class Graph implements AutoCloseable
             final String name,
             final long id,
             final double longitude,
-            final  double latitude,
+            final double latitude,
             boolean goodWeather
     ) {
         String queryText = "CREATE (s:Station) " +
@@ -96,6 +94,12 @@ public class Graph implements AutoCloseable
         runQuery(queryText, params);
     }
 
+    public void deleteAll() {
+        String queryText = "MATCH (n) DETACH DELETE n";
+        Map<String, Object> params = new HashMap<>();
+        runQuery(queryText, params);
+    }
+
     /*
         Diese Funktion führt eine neo4j query auf der Datenbank aus
      */
@@ -103,9 +107,9 @@ public class Graph implements AutoCloseable
         try (Session session = driver.session()) {
             String trans = session.writeTransaction(tx -> {
                 StatementResult result = tx.run(query, params);
-                return result.single().get(0).asString();
+                return "test";//result.single().get(0).asString();
             });
-            System.out.println(trans);
+            //  System.out.println(trans);
         }
     }
 }

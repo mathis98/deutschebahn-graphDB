@@ -66,6 +66,10 @@ public class Main {
         //Create Stations and tracks
         try (Graph graph = new Graph(uri, user, password)) {
 
+
+            //First delete all nodes
+            graph.deleteAll();
+
             for (Station s : stationList) {
                 graph.addStation(s.getName(), s.getEvaID(), s.getLongitude(), s.getLatitude(), s.getWeather());
 
@@ -97,8 +101,8 @@ public class Main {
                 }
                 trackOrder.clear();
             }
-            //trackOrder.stream().forEach(a -> System.out.println("line: " + a[1] + " track: " + a[0] + " order: " + a[2]));
 
+            System.out.println("Creation of Graph was successful!");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -18,7 +18,7 @@ public class Station {
     }
 
     public void setWeather(int weather) {
-        if(weather >= 800) {
+        if (weather >= 800) {
             this.weather = true;
         } else {
             this.weather = false;
@@ -32,10 +32,10 @@ public class Station {
         this.longitude = Double.valueOf(longitude);
         this.latitude = Double.valueOf(latitude);
 
-        if(!this.lineList.contains(line)) {
+        if (!this.lineList.contains(line)) {
             this.lineList.add(line);
         }
-        if(!this.trackList.contains(track)) {
+        if (!this.trackList.contains(track)) {
             this.trackList.add(track);
         }
         this.lineInfoList.add(new lineInfo(line, track, order));
@@ -43,13 +43,13 @@ public class Station {
     }
 
     public void addToLineList(int line) {
-        if(!this.lineList.contains(line)) {
+        if (!this.lineList.contains(line)) {
             this.lineList.add(line);
         }
     }
 
     public void addToTrackList(int track) {
-        if(!this.trackList.contains(track)) {
+        if (!this.trackList.contains(track)) {
             this.trackList.add(track);
         }
     }
@@ -58,17 +58,17 @@ public class Station {
         this.lineInfoList.add(new lineInfo(line, track, order));
     }
 
-    public int getEvaID(){
+    public int getEvaID() {
         return this.evaID;
     }
 
-    public String toString(){
+    public String toString() {
 
         return "Line: " + this.lineInfoList.get(0).getLine() + " Order: " + this.lineInfoList.get(0).getOrder() + " Track: " + this.lineInfoList.get(0).getTrack();
 
     }
 
-    public void writeLineInfo(){
+    public void writeLineInfo() {
         this.lineInfoList.stream().forEach(a -> System.out.println("Station: " + this.name + " (" + this.evaID + ") " + a.toString()));
     }
 
@@ -76,23 +76,23 @@ public class Station {
         return this.lineInfoList;
     }
 
-    public ArrayList<Integer> getTrackList(){
+    public ArrayList<Integer> getTrackList() {
         return this.trackList;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public Double getLatitude(){
+    public Double getLatitude() {
         return this.latitude;
     }
 
-    public Double getLongitude(){
+    public Double getLongitude() {
         return this.longitude;
     }
 
-    public ArrayList<Integer> getLineList(){
+    public ArrayList<Integer> getLineList() {
         return this.lineList;
     }
 }
