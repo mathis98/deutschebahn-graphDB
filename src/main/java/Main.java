@@ -4,13 +4,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.*;
 
+import net.aksingh.owmjapis.api.APIException;
+import net.aksingh.owmjapis.core.OWM;
 import org.neo4j.unsafe.impl.batchimport.stats.Stat;
 
 public class Main {
-    static String password = "1234";
+    static String password = "1111";
     static String uri = "bolt://localhost:7687";
     static String user = "neo4j";
-
     public static ArrayList<Station> stationList;
 
     public static ArrayList<Integer[]> trackOrder = new ArrayList<Integer[]>();
@@ -24,6 +25,9 @@ public class Main {
 
         // new dbAPIRequest
         dbApiRequest api = new dbApiRequest();
+
+        // openWeatherMap
+        OWM owm = new OWM("b633ef2b75898546869eb47513134043");
 
         // create a new instance of JSONParser
         JSONParser parser = new JSONParser();
@@ -49,6 +53,15 @@ public class Main {
         }
         //stationList.stream().forEach(a -> a.writeLineInfo());
         //stationList.stream().forEach(a -> System.out.println("Station: " + a.getEvaID() + " size of infoList: " + a.getLineInfoList().size()));
+
+        //add weather data
+        stationList.stream().forEach(a -> {
+            try {
+                a.setWeather(owm.currentWeatherByCoords(a.getLatitude(), a.getLongitude()).getWeatherList().get(0).getMainInfo());
+            } catch (APIException e) {
+                e.printStackTrace();
+            }
+        });
 
         //Create Stations and tracks
         try (Graph graph = new Graph(uri, user, password)) {

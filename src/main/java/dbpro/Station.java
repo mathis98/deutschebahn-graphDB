@@ -8,9 +8,18 @@ public class Station {
     private int evaID;
     private Double longitude;
     private Double latitude;
+    private String weather;
     private ArrayList<Integer> lineList = new ArrayList<Integer>();
     private ArrayList<Integer> trackList = new ArrayList<Integer>();
     private ArrayList<lineInfo> lineInfoList = new ArrayList<lineInfo>();
+
+    public String getWeather() {
+        return weather;
+    }
+
+    public void setWeather(String weather) {
+        this.weather = weather;
+    }
 
     public Station(String name, int evaID, String longitude, String latitude, int line, int track, int order) {
 
