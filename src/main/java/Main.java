@@ -18,6 +18,9 @@ public class Main {
     public static lineInfo start;
     public static lineInfo end;
 
+    public static Random random = new Random();
+
+
 
     public static void main(String... args) throws Exception {
         // List for storing all the journeys
@@ -74,7 +77,7 @@ public class Main {
                 graph.addStation(s.getName(), s.getEvaID(), s.getLongitude(), s.getLatitude(), s.getWeather());
 
                 for (Integer t : s.getTrackList()) {
-                    graph.addTrack(t, true, true, s.getEvaID());
+                    graph.addTrack(t,(random.nextInt(4) == 0) ? false : true, (random.nextInt(6) == 0) ? false : true, s.getEvaID());
                 }
             }
 
