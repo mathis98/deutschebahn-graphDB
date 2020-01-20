@@ -77,7 +77,7 @@ public class Main {
                 graph.addStation(s.getName(), s.getEvaID(), s.getLongitude(), s.getLatitude(), s.getWeather());
 
                 for (Integer t : s.getTrackList()) {
-                    graph.addTrack(t,(random.nextInt(2) == 0) ? false : true, (random.nextInt(6) == 0) ? false : true, s.getEvaID());
+                    graph.addTrack(t,(random.nextInt(8) == 0) ? false : true, (random.nextInt(3) == 0) ? false : true, s.getEvaID());
                 }
             }
 
