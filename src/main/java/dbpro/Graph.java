@@ -140,8 +140,9 @@ public class Graph implements AutoCloseable {
     }
 
     private void deleteStations(int startID, int endID) {
-        String queryText = "MATCH (start:Station{evaID:$startID}), (end:Station{evaID:$endID}) " +
-                "MATCH (s:Station) WHERE s <> start AND s <> end DETACH DELETE s ";
+        String queryText = "MATCH (a:Station)-[:has]->(b:Track) " +
+                "WHERE a.evaID = $startID OR a.evaID = $endID " +
+                "CREATE (a)-[r:hasSpecial]->(b) ";
         Map<String, Object> params = new HashMap<>();
         params.put("startID", startID);
         params.put("endID", endID);
