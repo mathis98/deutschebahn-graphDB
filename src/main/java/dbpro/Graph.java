@@ -102,16 +102,66 @@ public class Graph implements AutoCloseable {
         runQuery(queryText, params);
     }
 
+    private void addZugWeights() {
+        String queryText = "MATCH (start:Track)<-[z:Zug]-(end:Track) " +
+                "SET z.weight = 1";
+        runQuery(queryText, new HashMap<>());
+    }
+
+    private void addChangeWeights() {
+        String queryText = "MATCH (start:Track)<-[c:change]-(end:Track) " +
+                "SET c.weight = 20";
+        runQuery(queryText, new HashMap<>());
+    }
+
+    public void addWeights() {
+        addZugWeights();
+        addChangeWeights();
+    }
+
+    public void addChanges() {
+        String queryText = "match (a:Track),(b:Track),(c:Station) " +
+                "Where (a.evaID = b.evaID = c.evaID) and (id(a) <> id(b)) and (a.elevator = true and b.elevator = true) and ((c.goodWeather = false and a.roofing=true and b.roofing=true) or c.goodWeather = true) " +
+                "Create (a)-[d:change]->(b) " +
+                "return a,b,c";
+        runQuery(queryText, new HashMap<>());
+    }
+
+    public String getConnection(int startID, int endID) {
+        deleteStations(startID, endID);
+
+        String queryText = "MATCH (start:Station{evaID:$startID}), (end:Station{evaID:$endID}) " +
+                "CALL apoc.algo.dijkstra(start, end, 'has|Zug|change', 'weight', 1.0) YIELD path, weight " +
+                "RETURN path, weight";
+        Map<String, Object> params = new HashMap<>();
+        params.put("startID", startID);
+        params.put("endID", endID);
+        return runQuery(queryText, params);
+    }
+
+    private void deleteStations(int startID, int endID) {
+        String queryText = "MATCH (start:Station{evaID:$startID}), (end:Station{evaID:$endID}) " +
+                "MATCH (s:Station) WHERE s <> start AND s <> end DETACH DELETE s ";
+        Map<String, Object> params = new HashMap<>();
+        params.put("startID", startID);
+        params.put("endID", endID);
+        runQuery(queryText, params);
+    }
+
     /*
         Diese Funktion führt eine neo4j query auf der Datenbank aus
      */
-    private void runQuery(String query, Map<String, Object> params) {
-        try (Session session = driver.session()) {
-            String trans = session.writeTransaction(tx -> {
+    private String runQuery(String query, Map<String, Object> params) {
+        Session session = driver.session();
+        try {
+            session.writeTransaction(tx -> {
                 StatementResult result = tx.run(query, params);
-                return "test";//result.single().get(0).asString();
+                return result.toString();
             });
-            //  System.out.println(trans);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return "Error";
         }
+        return "what happened?";
     }
 }

@@ -105,7 +105,18 @@ public class Main {
                 trackOrder.clear();
             }
 
+            // add change relations to graph
+            graph.addChanges();
+
+            // add weights to graph
+            graph.addWeights();
+
             System.out.println("Creation of Graph was successful!");
+
+            // get connection from Halle to Wiesbaden
+            String result = graph.getConnection(8000250, 8010159);
+            // print the result
+            System.out.println(result);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
