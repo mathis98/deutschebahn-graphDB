@@ -20,6 +20,10 @@ public class Main {
 
     public static Random random = new Random();
 
+    public static boolean weather = true;
+    public static boolean elevator = true;
+    static boolean difficulties = true;
+    public static int changeWeight = difficulties ? 10 : 5;
 
 
     public static void main(String... args) throws Exception {
@@ -106,10 +110,10 @@ public class Main {
             }
 
             // add change relations to graph
-            graph.addChanges();
+            graph.addChanges(weather, elevator);
 
             // add weights to graph
-            graph.addWeights();
+            graph.addWeights(changeWeight);
 
             System.out.println("Creation of Graph was successful!");
 

@@ -108,21 +108,25 @@ public class Graph implements AutoCloseable {
         runQuery(queryText, new HashMap<>());
     }
 
-    private void addChangeWeights() {
+    private void addChangeWeights(int changeWeight) {
         String queryText = "MATCH (start:Track)<-[c:change]-(end:Track) " +
-                "SET c.weight = 20";
-        runQuery(queryText, new HashMap<>());
+                "SET c.weight = $changeWeight";
+        Map<String, Object> params = new HashMap<>();
+        params.put("changeWeight", changeWeight);
+        runQuery(queryText, params);
     }
 
-    public void addWeights() {
+    public void addWeights(int changeWeight) {
         addZugWeights();
-        addChangeWeights();
+        addChangeWeights(changeWeight);
     }
 
-    public void addChanges() {
-        String queryText = "match (a:Track),(b:Track),(c:Station) " +
-                "Where (a.evaID = b.evaID = c.evaID) and (id(a) <> id(b)) and (a.elevator = true and b.elevator = true) and ((c.goodWeather = false and a.roofing=true and b.roofing=true) or c.goodWeather = true) " +
-                "Create (a)-[d:change]->(b) " +
+    public void addChanges(boolean weather, boolean elevator) {
+        String queryText = "match (a:Track),(b:Track),(c:Station) ";
+        if(weather && elevator) queryText += "Where (a.evaID = b.evaID = c.evaID) and (id(a) <> id(b)) and (a.elevator = true and b.elevator = true) and ((c.goodWeather = false and a.roofing=true and b.roofing=true) or c.goodWeather = true) ";
+        else if(weather) queryText += "Where (a.evaID = b.evaID = c.evaID) and (id(a) <> id(b)) and ((c.goodWeather = false and a.roofing=true and b.roofing=true) or c.goodWeather = true) ";
+        else if(elevator) queryText += "Where (a.evaID = b.evaID = c.evaID) and (id(a) <> id(b)) and (a.elevator = true and b.elevator = true) ";
+         queryText += "Create (a)-[d:change]->(b) " +
                 "return a,b,c";
         runQuery(queryText, new HashMap<>());
     }
