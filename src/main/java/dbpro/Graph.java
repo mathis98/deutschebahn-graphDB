@@ -131,19 +131,7 @@ public class Graph implements AutoCloseable {
         runQuery(queryText, new HashMap<>());
     }
 
-    public String getConnection(int startID, int endID) {
-        deleteStations(startID, endID);
-
-        String queryText = "MATCH (start:Station{evaID:$startID}), (end:Station{evaID:$endID}) " +
-                "CALL apoc.algo.dijkstra(start, end, 'has|Zug|change', 'weight', 1.0) YIELD path, weight " +
-                "RETURN path, weight";
-        Map<String, Object> params = new HashMap<>();
-        params.put("startID", startID);
-        params.put("endID", endID);
-        return runQuery(queryText, params);
-    }
-
-    private void deleteStations(int startID, int endID) {
+    public void addSpecial(int startID, int endID) {
         String queryText = "MATCH (a:Station)-[:has]->(b:Track) " +
                 "WHERE a.evaID = $startID OR a.evaID = $endID " +
                 "CREATE (a)-[r:hasSpecial]->(b) ";
@@ -156,17 +144,12 @@ public class Graph implements AutoCloseable {
     /*
         Diese Funktion führt eine neo4j query auf der Datenbank aus
      */
-    private String runQuery(String query, Map<String, Object> params) {
+    private void runQuery(String query, Map<String, Object> params) {
         Session session = driver.session();
         try {
-            session.writeTransaction(tx -> {
-                StatementResult result = tx.run(query, params);
-                return result.toString();
-            });
+            session.writeTransaction(tx -> tx.run(query, params));
         } catch(Exception e) {
             e.printStackTrace();
-            return "Error";
         }
-        return "what happened?";
     }
 }

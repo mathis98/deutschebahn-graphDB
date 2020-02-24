@@ -6,7 +6,6 @@ import java.util.*;
 
 import net.aksingh.owmjapis.api.APIException;
 import net.aksingh.owmjapis.core.OWM;
-import org.neo4j.unsafe.impl.batchimport.stats.Stat;
 
 public class Main {
     static String password = "1111";
@@ -14,9 +13,7 @@ public class Main {
     static String user = "neo4j";
     public static ArrayList<Station> stationList;
 
-    public static ArrayList<Integer[]> trackOrder = new ArrayList<Integer[]>();
-    public static lineInfo start;
-    public static lineInfo end;
+    public static ArrayList<Integer[]> trackOrder = new ArrayList<>();
 
     public static Random random = new Random();
 
@@ -25,13 +22,10 @@ public class Main {
     static boolean difficulties = true;
     public static int changeWeight = difficulties ? 10 : 5;
 
+    public static int startID = 8000250;
+    public static int endID = 8010159;
 
-    public static void main(String... args) throws Exception {
-        // List for storing all the journeys
-        HashMap<String, Journey> journeys = new HashMap<>();
-
-        // new dbAPIRequest
-        dbApiRequest api = new dbApiRequest();
+    public static void main(String... args) {
 
         // openWeatherMap
         OWM owm = new OWM("b633ef2b75898546869eb47513134043");
@@ -52,17 +46,17 @@ public class Main {
                 FileReader reader = new FileReader(file);
 
                 stationList = parser.parseJson(reader, line);
-
-
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
         }
+
+        // FOR DEBUGGING::
         //stationList.stream().forEach(a -> a.writeLineInfo());
         //stationList.stream().forEach(a -> System.out.println("Station: " + a.getEvaID() + " size of infoList: " + a.getLineInfoList().size()));
 
         //add weather data
-        stationList.stream().forEach(a -> {
+        stationList.forEach(a -> {
             try {
                 a.setWeather(owm.currentWeatherByCoords(a.getLatitude(), a.getLongitude()).getWeatherList().get(0).getConditionId());
             } catch (APIException e) {
@@ -73,15 +67,16 @@ public class Main {
         //Create Stations and tracks
         try (Graph graph = new Graph(uri, user, password)) {
 
-
             //First delete all nodes
             graph.deleteAll();
 
+            // add all stations
             for (Station s : stationList) {
                 graph.addStation(s.getName(), s.getEvaID(), s.getLongitude(), s.getLatitude(), s.getWeather());
 
+                // add all tracks
                 for (Integer t : s.getTrackList()) {
-                    graph.addTrack(t,(random.nextInt(8) == 0) ? false : true, (random.nextInt(3) == 0) ? false : true, s.getEvaID());
+                    graph.addTrack(t, random.nextInt(8) != 0, random.nextInt(3) != 0, s.getEvaID());
                 }
             }
 
@@ -115,12 +110,10 @@ public class Main {
             // add weights to graph
             graph.addWeights(changeWeight);
 
-            System.out.println("Creation of Graph was successful!");
+            // add hasSpecial to be able to query connection in Graph
+            graph.addSpecial(startID, endID);
 
-            // get connection from Halle to Wiesbaden
-            String result = graph.getConnection(8000250, 8010159);
-            // print the result
-            System.out.println(result);
+            System.out.println("Creation of Graph was successful!");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

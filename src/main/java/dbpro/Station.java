@@ -9,37 +9,27 @@ public class Station {
     private Double longitude;
     private Double latitude;
     private boolean weather;
-    private ArrayList<Integer> lineList = new ArrayList<Integer>();
-    private ArrayList<Integer> trackList = new ArrayList<Integer>();
-    private ArrayList<lineInfo> lineInfoList = new ArrayList<lineInfo>();
+    private ArrayList<Integer> lineList = new ArrayList<>();
+    private ArrayList<Integer> trackList = new ArrayList<>();
+    private ArrayList<lineInfo> lineInfoList = new ArrayList<>();
 
     public boolean getWeather() {
         return weather;
     }
 
     public void setWeather(int weather) {
-        if (weather >= 800) {
-            this.weather = true;
-        } else {
-            this.weather = false;
-        }
+        this.weather = weather >= 800;
     }
 
     public Station(String name, int evaID, String longitude, String latitude, int line, int track, int order) {
-
         this.name = name;
         this.evaID = evaID;
         this.longitude = Double.valueOf(longitude);
         this.latitude = Double.valueOf(latitude);
 
-        if (!this.lineList.contains(line)) {
-            this.lineList.add(line);
-        }
-        if (!this.trackList.contains(track)) {
-            this.trackList.add(track);
-        }
+        this.lineList.add(line);
+        this.trackList.add(track);
         this.lineInfoList.add(new lineInfo(line, track, order));
-
     }
 
     public void addToLineList(int line) {
@@ -63,13 +53,11 @@ public class Station {
     }
 
     public String toString() {
-
         return "Line: " + this.lineInfoList.get(0).getLine() + " Order: " + this.lineInfoList.get(0).getOrder() + " Track: " + this.lineInfoList.get(0).getTrack();
-
     }
 
     public void writeLineInfo() {
-        this.lineInfoList.stream().forEach(a -> System.out.println("Station: " + this.name + " (" + this.evaID + ") " + a.toString()));
+        this.lineInfoList.forEach(a -> System.out.println("Station: " + this.name + " (" + this.evaID + ") " + a.toString()));
     }
 
     public ArrayList<lineInfo> getLineInfoList() {
